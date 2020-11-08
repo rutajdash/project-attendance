@@ -8,6 +8,12 @@ A program capable of signing in and attending meetings as per a fixed schedule o
 
 - Attend meetings on MS Teams from hardcoded meeting details and credentials
 
+### Next Steps
+
+- Add mocha and chai for unit testing
+- Setup PM2 environment configration
+- Create EXE files to control the program
+
 ## Planned Capabilites
 
 - Timetable attach through CSV file
