@@ -4,6 +4,8 @@ A program capable of signing in and attending meetings as per a fixed schedule o
 
 - Developed on Node.js v12 LTS
 
+**Developed in association with [Cyborg NITR](https://github.com/CYBORG-NIT-ROURKELA/)**
+
 ## Present Capabilites
 
 - Attend meetings on MS Teams from hardcoded meeting details and credentials
