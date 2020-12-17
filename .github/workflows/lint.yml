@@ -1,0 +1,45 @@
+name: Lint
+
+on:
+  pull_request_target:
+    branches: [junk/actions/linter]
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update source code
+        run: npx eslint index.js --fix
+
+      - name: Prettify code
+        run: npx prettier --write index.js
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Format code with eslint and prettier
+
+      # - name: Commit changes
+      #   uses: EndBug/add-and-commit@v5
+      #   with:
+      #     author_name: Linter - GitHub Actions
+      #     author_email: linter@github.com
+      #     message: "Lint code with eslint and prettier"
+      #     add: "index.js"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.CUSTOM_GH_TOKEN }}
