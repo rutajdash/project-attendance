@@ -10,23 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out Git repository
+      - name: Checkout
         uses: actions/checkout@v2
+        with:
+          # Make sure the actual branch is checked out when running on pull requests
+          ref: ${{ github.head_ref }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 12.x
 
-      # ESLint and Prettier must be in `package.json`
-      - name: Install Node.js dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
+      - name: Update source code
+        run: eslint "index.js" --fix
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v3.1
         with:
-          github_token: ${{ secrets.CUSTOM_GH_TOKEN }}
-          # Enable linters
-          eslint: true
-          prettier: true
-          auto_fix: true
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write index.js
+          commit_message: "Format code with prettier"
+          only_changed: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GH_TOKEN }}
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: Linter - GitHub Actions
+          author_email: linter@github.com
+          message: "Lint code with eslint and prettier"
+          add: "index.js"
+        env:
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GH_TOKEN }}
