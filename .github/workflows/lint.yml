@@ -10,29 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout 1
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request_target.head.ref }}
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
+      - name: Checkout 2
+        uses: actions/checkout@v2
         with:
-          node-version: 12.x
+          ref: ${{ github.head_ref }}
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Update source code
-        run: npx eslint index.js --fix
-
-      - name: Prettify code
-        run: npx prettier --write index.js
-
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Checkout 3
+        uses: actions/checkout@v2
         with:
-          commit_message: Format code with eslint and prettier
+          ref: ${{ github.base_ref }}
+
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: 12.x
+
+      # - name: Install dependencies
+      #   run: npm install
+
+      # - name: Update source code
+      #   run: npx eslint index.js --fix
+
+      # - name: Prettify code
+      #   run: npx prettier --write index.js
+
+      # - name: Commit changes
+      #   uses: stefanzweifel/git-auto-commit-action@v4
+      #   with:
+      #     commit_message: Format code with eslint and prettier
 
       # - name: Commit changes
       #   uses: EndBug/add-and-commit@v5
