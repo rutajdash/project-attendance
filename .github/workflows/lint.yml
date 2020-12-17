@@ -25,17 +25,10 @@ jobs:
         run: npm install
 
       - name: Update source code
-        run: eslint "index.js" --fix
+        run: npx eslint index.js --fix
 
       - name: Prettify code
-        uses: creyD/prettier_action@v3.1
-        with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write index.js
-          commit_message: "Format code with prettier"
-          only_changed: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.CUSTOM_GH_TOKEN }}
+        run: npx prettier --write index.js
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
