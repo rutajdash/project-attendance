@@ -33,5 +33,9 @@
   "homepage": "https://github.com/rutajdash/project-attendance#readme",
   "dependencies": {
     "puppeteer": "^5.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.15.0",
+    "prettier": "^2.2.1"
   }
 }
