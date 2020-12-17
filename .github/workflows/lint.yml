@@ -13,17 +13,18 @@ jobs:
       - name: Checkout 1
         uses: actions/checkout@v2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Checkout 2
-        uses: actions/checkout@v2
-        with:
+          repository: ${{ github.event.pull_request.sender.login}}/project-attendance
           ref: ${{ github.head_ref }}
 
-      - name: Checkout 3
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.base_ref }}
+      # - name: Checkout 2
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: ${{ github.head_ref }}
+
+      # - name: Checkout 3
+      #   uses: actions/checkout@v2
+      #   with:
+      #     ref: ${{ github.base_ref }}
 
       # - name: Set up Node.js
       #   uses: actions/setup-node@v1
