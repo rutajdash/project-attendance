@@ -2,12 +2,12 @@ const puppeteer = require("puppeteer");
 // command: pm2 --output out.log --error err.log --max-memory-restart 100M --max-restarts 5 start index.js
 
 (async () => {
-	const browser = await puppeteer.launch({
+		const browser = await puppeteer.launch({
 		product: "chrome",
 		headless: false,
 		defaultViewport: null,
-		args: ["--use-fake-ui-for-media-stream"],
-	});
+			args: ["--use-fake-ui-for-media-stream"],
+		});
 
 	const page = await browser.newPage();
 	await page.goto("https://teams.microsoft.com");
