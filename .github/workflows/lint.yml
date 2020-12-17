@@ -13,7 +13,7 @@ jobs:
       - name: Checkout 1
         uses: actions/checkout@v2
         with:
-          repository: ${{ github.event.pull_request.sender.login }}/project-attendance
+          repository: ${{ github.event.sender.login }}/project-attendance
           ref: ${{ github.head_ref }}
 
       # - name: Checkout 2
