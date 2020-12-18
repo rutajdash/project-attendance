@@ -18,11 +18,23 @@ jobs:
           # This is important to fetch the changes to the previous commit
           fetch-depth: 0
 
-      - name: Prettify code
-        uses: creyD/prettier_action@v3.1
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
         with:
-          # This part is also where you can pass other options, for example:
-          prettier_options: --write **/*.{js,md}
-          only_changed: True
+          node-version: 12.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update source code
+        run: npx prettier --write index.js
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
+        with:
+          author_name: Your Name
+          author_email: mail@example.com
+          message: "Your commit message"
+          add: "*.js"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CUSTOM_GH_TOKEN }}
